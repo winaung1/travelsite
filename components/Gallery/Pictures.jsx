@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'
 export const Pictures = ({loading}) => {
     const [images, setImages] = useState([])
     const [original, setOriginal] = useState([])
-    const [activeState, setActiveState] = useState(true)
+    const [activeState, setActiveState] = useState(false)
     const [id, setId] = useState(1)
     const fetchPictures = async (userSearch) => {
         const getItem = localStorage.getItem(userSearch)
