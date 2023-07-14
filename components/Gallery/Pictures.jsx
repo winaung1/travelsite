@@ -47,9 +47,11 @@ export const Pictures = ({loading}) => {
         
       }
       
+useEffect(() => {
 
-      fetchOriginal('thailand')
-      
+  fetchOriginal('thailand')
+  
+}, [])
       
   return (
     <>
