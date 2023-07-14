@@ -46,6 +46,10 @@ export const Pictures = ({loading}) => {
         }
         
       }
+
+      useEffect(() => {
+        fetchOriginal('thailand')
+      }, [])
       
       
   return (
@@ -69,7 +73,7 @@ export const Pictures = ({loading}) => {
     </div>
     <div className='flex flex-wrap gap-4 justify-center items-center'>
         {activeState ? (original.map(img => <Image className='w-80 h-40 object-cover object-center' alt='' key={img.id} src={img?.src?.original} width={img.width} height={img.height}/>))
-        : images.map(img => <Image className='w-80 h-40 object-cover object-center' alt='' key={img.id} src={img?.src?.original} width={img.width} height={img.height}/>)
+        : oimages.map(img => <Image className='w-80 h-40 object-cover object-center' alt='' key={img.id} src={img?.src?.original} width={img.width} height={img.height}/>)
         }
     </div>
 
