@@ -27,25 +27,29 @@ export const Pictures = ({loading}) => {
         
       }
       
-      const fetchOriginal = async (userSearch) => {
-        const getItem = localStorage.getItem(userSearch)
-        if(getItem){
-          setImages(JSON.parse(getItem))
-        } else {
-          const url = `https://api.pexels.com/v1/search?query=${userSearch}&per_page=25`
-          const response = await fetch(url,  {
-            headers: {
-              Authorization: process.env.NEXT_PUBLIC_API_URL,
-              Origin: '*',
-            }
-          });
-          const data = await response.json();
-          setOriginal(data.photos)
-          console.log(data.photos)
-          localStorage.setItem(userSearch, JSON.stringify(data.photos))
-        }
-        
-      }
+    
+      
+      useEffect(() => {
+        const fetchOriginal = async () => {
+          const getItem = localStorage.getItem('thailand')
+          if(getItem){
+            setOriginal(JSON.parse(getItem))
+          } else {
+            const url = `https://api.pexels.com/v1/search?query=thailand&per_page=25`
+            const response = await fetch(url,  {
+              headers: {
+                Authorization: process.env.NEXT_PUBLIC_API_URL,
+                Origin: '*',
+              }
+            });
+            const data = await response.json();
+            setOriginal(data.photos)
+            console.log(data.photos)
+            localStorage.setItem('thailand', JSON.stringify(data.photos))
+          }
+          }
+        fetchOriginal('thailand')
+      }, [])
       
       
   return (
@@ -68,7 +72,7 @@ export const Pictures = ({loading}) => {
             }} className={id == 3 ? 'border-green-500 rounded border-2 px-4 py-1 text-white' : 'border-2 px-4 py-1 rounded hover:border-green-500 bg-white'}>Switzerland</button>
     </div>
     <div className='flex flex-wrap gap-4 justify-center items-center'>
-        {activeState ? <p className='text-white text-4xl font-bold h-80 pt-4'>There&apos;s no image yet. Please select which countries you want.</p>
+        {activeState ? (original.map(img => <Image className='w-80 h-40 object-cover object-center' alt='' key={img.id} src={img?.src?.original} width={img.width} height={img.height}/>))
         : images.map(img => <Image className='w-80 h-40 object-cover object-center' alt='' key={img.id} src={img?.src?.original} width={img.width} height={img.height}/>)
         }
     </div>
