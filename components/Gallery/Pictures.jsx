@@ -30,7 +30,7 @@ export const Pictures = ({loading}) => {
       const fetchOriginal = async (userSearch) => {
         const getItem = localStorage.getItem(userSearch)
         if(getItem){
-          setImages(JSON.parse(getItem))
+          setOriginal(JSON.parse(getItem))
         } else {
           const url = `https://api.pexels.com/v1/search?query=${userSearch}&per_page=25`
           const response = await fetch(url,  {
@@ -46,10 +46,9 @@ export const Pictures = ({loading}) => {
         }
         
       }
+      
 
-      useEffect(() => {
-        fetchOriginal('thailand')
-      }, [])
+      fetchOriginal('thailand')
       
       
   return (
